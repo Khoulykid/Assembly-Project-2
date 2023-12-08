@@ -1,0 +1,52 @@
+* {
+	--bg: #1f2228;
+	--sectionBg: #2e3139;
+	--sectionBorder: #444455;
+	--textLight: #c4cbda;
+	--text: #bdc3d1;
+	--lineNumber: #717888;
+
+	color: var(--text);
+	font-family: "Courier New", Courier, monospace;
+	font-weight: 500;
+}
+.main {
+	background-color: var(--bg);
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 1%;
+
+	padding: 2rem;
+	box-sizing: border-box;
+}
+
+.svgIcon {
+	height: 1.8rem;
+	aspect-ratio: 1;
+}
+
+.btn-img {
+	padding: 0.2rem;
+	box-sizing: border-box;
+	border-radius: 999px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+
+	transition: all 10ms ease-in-out;
+}
+.btn-img:active {
+	background-color: var(--sectionBorder);
+
+	transform: scale(0.9);
+}
