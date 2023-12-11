@@ -6,10 +6,9 @@
         <title>SAN</title>
         <link rel="stylesheet" href="gui.css" />
     </head>
-    <body>
         <div class="main">
             <div class="memory_cache">
-                <div class="memory_input">
+                <div class="memory_input section">
                     <span class="sectionTitle">Memory Access</span>
                     <div class="Actionswrapper">
                         <input
@@ -23,55 +22,98 @@
                         <img id="play-btn" class="svgIcon btn-img" src="./svgs/play.svg" alt="" style="display: flex;">
 
                     </div>
-                    <div class="input_area">
-                        <div id="highlight-line" class="highlight-line"></div>
-						<div class="line-numbers" id="codeLineNumbers">
-							<span></span>
+                    <div class="inputArea" id="inputArea">
+                        <div class="grow-wrap">
+							<textarea
+								class="code"
+								wrap="off"
+								id="code"
+								oninput="this.parentNode.dataset.replicatedValue = this.value"
+							></textarea>
 						</div>
                     </div>
                 </div>
-                <div class="cache_box">
+                <div class="cache_box section">
                     <span class ="sectionTitle">Cache</span>
                     <div class="cache_output">
                         <body></body>
                     </div>
                 </div>
             </div>
-            <div class="Inputs_Hit_miss">
-                <div class="S_L_N_input">
-                    <div class="S_input">
-                        <span class="sectionLabel">S: </span>
-                        <body></body>
-                    </div>
-                    <div class="L_input">
-                        <span class="L_input">L: </span>
-                        <body></body>
-                    </div>
-                    <div class="N_input">
-                        <span class="sectionLabel">N: </span>
-                        <body></body>
-                    </div>
+            
+            <div class="Input_hs">
+                <div  class="memorytype section">
+                    <span class="sectionsubhead">Memory Type</span>
+                    <input class="directm" type="button" value="Direct Mapping" style="border-style:inset"></input>
+                    <input class="nass" type="button" value="N-Set Associativity" style="border-style:inset"></input>
+                    <input class="fass" type="button" value="Full Associativity" style="border-style:inset"></input>
+                    
                 </div>
-                <div class="memory_type">
-                    <span class="sectionTitle">Memory Type</span>
-                    <body></body>
-                </div>
-                <div class="hit_miss_ratio">
+                <div class="hit_miss_ratio section">
                     <table id="hitmiss" class="hit_table">
                         <tbody>
-                            <tr class="row"></tr>
-                            <td class="col1">Type</td>
-                            <td class="col2">Number</td>
-                            <td class="col3">Ratio</td>
-                            <tr class="row"></tr>
-                            <td
+                            <tr id="1st_row" class="row">
+                                <td class="col1">Type</td>
+                                <td class="col2">Number</td>
+                                <td class="col3">Ratio</td>
+                            </tr>
+                                
+                            <tr id="2nd_row" class="row">
+                                <td class="col1">Hit:</td>
+                                <td id="Hit_number" class="col2">0</td>
+                                <td id="Hit_ratio" class="col3">0</td>
+                            </tr>
+                                
+                            <tr id="3rd_row" class="row">
+                                <td class="col1">Miss</td>
+                                <td id="Miss_number" class="col2">0</td>
+                                <td id="Miss_ratio" class="col3">0</td>
+                            </tr>
+                            <tr id="4th_row" class="row">
+                                <td class="col1">Memory Access</td>
+                                <td id="memory_number" class="col2">0</td>
+                                <td id="memory_ratio" class="col3">1</td>
+                            </tr>
+
                         </tbody>
                     </table>
+                    
+                </div>
+                <div class="S_L_N_input section">
+                    <div class="S_input">
+                        <span class="inputLabel">S : </span>
+                        <input
+                            type ="text"
+                            class="S"
+                            wrap="off"
+                            id="S"
+                            oninput="this.parentNode.dataset.replicatedValue = this.value"
+                        ></input>
+                    </div>
+                    <div class="L_input">
+                        <span class="inputLabel">L : </span>
+                        <input
+                            type ="text"
+                            class="L"
+                            wrap="off"
+                            id="L"
+                            oninput="this.parentNode.dataset.replicatedValue = this.value"
+                        ></input>
+                    </div>
+                    <div class="N_input">
+                        <span class="inputLabel">N : </span>
+                        <input
+                            type ="text"
+                            class="N"
+                            wrap="off"
+                            id="N"
+                            oninput="this.parentNode.dataset.replicatedValue = this.value"
+                        ></input>
+                    </div>
                 </div>
             </div>
 
         </div>
-    </body>
 
 
 
