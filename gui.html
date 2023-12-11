@@ -6,6 +6,7 @@
         <title>SAN</title>
         <link rel="stylesheet" href="gui.css" />
     </head>
+    <body>
         <div class="main">
             <div class="memory_cache">
                 <div class="memory_input section">
@@ -44,9 +45,9 @@
             <div class="Input_hs">
                 <div  class="memorytype section">
                     <span class="sectionsubhead">Memory Type</span>
-                    <input class="directm" type="button" value="Direct Mapping" style="border-style:inset"></input>
-                    <input class="nass" type="button" value="N-Set Associativity" style="border-style:inset"></input>
-                    <input class="fass" type="button" value="Full Associativity" style="border-style:inset"></input>
+                    <input class="directm" id="directbutton" type="button" value="Direct Mapping" style="border-style:inset"></input>
+                    <input class="nass" id="nassbutton" type="button" value="N-Set Associativity" style="border-style:inset"></input>
+                    <input class="fass" id="fassbutton" type="button" value="Full Associativity" style="border-style:inset"></input>
                     
                 </div>
                 <div class="hit_miss_ratio section">
@@ -112,8 +113,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
+        <script src="script.js"></script>
+    </body>
 
 
 
