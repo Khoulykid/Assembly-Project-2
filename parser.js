@@ -5,6 +5,7 @@ class Parser
     s = 0; //cache size
     m = 0; //associativity
     c = 0; // number of blocks 
+    valbit = [];
     loopindex = 0;
     cacheCycles = 1;
     AMAT = 0.0;
@@ -82,6 +83,9 @@ class Parser
     separate_addreses()
     {
         this.addresses = this.AddressString.replaceAll(" ", "").split("\n");
+        this.addresses = this.addresses.filter(function(item) {
+            return item !== '';
+        });
     }
     calcC()
     {
@@ -106,6 +110,7 @@ class Parser
         {
             this.cache[i] = new Array(this.m).fill(''); 
             this.validity[i] = new Array(this.m).fill(false);
+            this.valbit[i] = new Array(this.m).fill(0);
         }
     }
     getRandomNumberInRange(m) 
@@ -120,7 +125,9 @@ class Parser
             let tag = "";
             let index = "";
             let offset = "";
-            let binaryaddress = this.addresses[i].toString(2); // Convert to binary
+            let binaryaddress = parseInt(this.addresses[i]).toString(2); // Convert to binary
+            while (binaryaddress.length < 24)
+                binaryaddress = '0' + binaryaddress;
             let blockNumber = binaryaddress.substring(0,(this.indexSize + this.tagSize));
             
             if(this.indexSize == 0) //FULL ASSOCIATIVE
@@ -136,8 +143,6 @@ class Parser
                 offset = binaryaddress.substring(this.indexSize + this.tagSize);
                 k = parseInt(index, 2); //getting index of the currect address in decimal
             }
-            console.log(blocknumber);
-             
             let missC = 0; 
 
             for(let j = 0; j < this.m ; j++) // loop over set associativity
@@ -156,8 +161,11 @@ class Parser
                     this.miss = this.miss + 1; //since we fill in one by one so if it is not valid then it is not found
                     this.cache[k][j] = tag; // fill in the cache w/ tag
                     this.validity[k][j] = true; //validity is true
+                    this.valbit[k][j] = 1;
+                    break;
                 }
             }
+            console.log(this.validity[0]);
             
 
             if(missC == this.m) //if the address was not found in the corresponding set @ all
@@ -167,6 +175,7 @@ class Parser
                 this.miss = this.miss + 1; // it is a miss
             }
             //displaying cache and validity before end each loop using next instruction button idk you do you
+            
             
         }
         
@@ -178,60 +187,65 @@ class Parser
 
     cache_command() {
         let k;
-            let tag = "";
-            let index = "";
-            let offset = "";
-            let binaryaddress = this.addresses[i].toString(2); // Convert to binary
-            let blockNumber = binaryaddress.substring(0, (this.indexSize + this.tagSize));
 
-            if (this.indexSize == 0) //FULL ASSOCIATIVE
+        let tag = "";
+        let index = "";
+        let offset = "";
+        let binaryaddress = parseInt(this.addresses[this.loopindex]).toString(2); // Convert to binary
+        while (binaryaddress.length < 24)
+            binaryaddress = '0' + binaryaddress;
+        let blockNumber = binaryaddress.substring(0, (this.indexSize + this.tagSize));
+
+        if (this.indexSize == 0) //FULL ASSOCIATIVE
+        {
+            tag = blockNumber;
+            offset = binaryaddress.substring(this.tagSize);
+            k = 0;
+        }
+        else {
+            tag = blockNumber.substring(0, this.tagSize);
+            index = blockNumber.substring(this.tagSize, this.indexSize + this.tagSize);
+            offset = binaryaddress.substring(this.indexSize + this.tagSize);
+            k = parseInt(index, 2); //getting index of the currect address in decimal
+        }
+        let missC = 0;
+
+        for (let j = 0; j < this.m; j++) // loop over set associativity
+        {
+            if (this.validity[k][j])//if validity is true
             {
-                tag = blockNumber;
-                offset = binaryaddress.substring(this.tagSize);
-                k = 0;
+                if (tag == this.cache[k][j]) // if it is already in cache
+                    this.hit = this.hit + 1; // it is a hit
+                else // if it is not in cache
+                {
+                    missC = missC + 1; // to see if all of them are misses
+                }
             }
             else {
-                tag = blockNumber.substring(0, this.tagSize);
-                index = blockNumber.substring(this.tagSize, this.indexSize + this.tagSize);
-                offset = binaryaddress.substring(this.indexSize + this.tagSize);
-                k = parseInt(index, 2); //getting index of the currect address in decimal
+                this.miss = this.miss + 1; //since we fill in one by one so if it is not valid then it is not found
+                this.cache[k][j] = tag; // fill in the cache w/ tag
+                this.validity[k][j] = true; //validity is true
+                this.valbit[k][j] = 1;
+                break;
             }
+        }
 
 
-            let missC = 0;
+        if (missC == this.m) //if the address was not found in the corresponding set @ all
+        {
+            let randomNum = this.getRandomNumberInRange(this.m);
+            this.cache[k][randomNum] = tag; // fill in the cache w/ tag
+            this.miss = this.miss + 1; // it is a miss
+        }
+        //displaying cache and validity before end each loop using next instruction button idk you do you
 
-            for (let j = 0; j < this.m; j++) // loop over set associativity
-            {
-                if (this.validity[k][j])//if validity is true
-                {
-                    if (tag == this.cache[k][j]) // if it is already in cache
-                        this.hit = this.hit + 1; // it is a hit
-                    else // if it is not in cache
-                    {
-                        missC = missC + 1; // to see if all of them are misses
-                    }
-                }
-                else {
-                    this.miss = this.miss + 1; //since we fill in one by one so if it is not valid then it is not found
-                    this.cache[k][j] = tag; // fill in the cache w/ tag
-                    this.validity[k][j] = true; //validity is true
-                }
-            }
-
-
-            if (missC == this.m) //if the address was not found in the corresponding set @ all
-            {
-                let randomNum = this.getRandomNumberInRange(this.m);
-                this.cache[k][randomNum] = tag; // fill in the cache w/ tag
-                this.miss = this.miss + 1; // it is a miss
-            }
-            //displaying cache and validity before end each loop using next instruction button idk you do you
 
 
         this.accessesTotal = this.miss + this.hit;
         this.hitRatio = this.hit / this.accessesTotal;
         this.missRatio = this.miss / this.accessesTotal;
         this.AMAT = this.cacheCycles + (this.missRatio * 120);
+        console.log(this.validity[this.loopindex]);
     }
 
 }
