@@ -22,6 +22,7 @@
 						</label>
                         <img id="play-btn" class="svgIcon btn-img" src="./svgs/play.svg" alt="" style="display: flex;">
                         <img id="playnext-btn" class="svgIcon btn-img" src="./svgs/arrow-right.svg" alt="" style="display: flex;">
+                        <img id="stop-btn" class="svgIcon btn-img" src="./svgs/stop.svg" alt="" style="display: flex;">
 
                     </div>
                     <div class="inputArea" id="inputArea">
@@ -50,11 +51,14 @@
             
             <div class="Input_hs">
                 <div  class="memorytype section">
-                    <span class="sectionsubhead">Memory Type</span>
-                    <input class="directm" id="directbutton" type="button" value="Direct Mapping" style="border-style:inset"></input>
-                    <input class="nass" id="nassbutton" type="button" value="N-Set Associativity" style="border-style:inset"></input>
-                    <input class="fass" id="fassbutton" type="button" value="Full Associativity" style="border-style:inset"></input>
-                    
+                    <span class="sectionsubhead">The Average Memory Access Time</span>
+                    <table id="amattable" class="amattable">
+                        <tbody>
+                            <tr id="AMATrow1" class="row">
+                                <td id="AMAT", class="col">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="hit_miss_ratio section">
                     <table id="hitmiss" class="hit_table">
