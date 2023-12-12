@@ -10,7 +10,7 @@
         <div class="main">
             <div class="memory_cache">
                 <div class="memory_input section">
-                    <span class="sectionTitle">Memory Access</span>
+                    <span id="test" class="sectionTitle">Memory Access</span>
                     <div class="Actionswrapper">
                         <input
 							id="open-file-choose-input"
@@ -21,6 +21,7 @@
 							<img class="svgIcon btn-img" src="./svgs/open.svg" alt="" />
 						</label>
                         <img id="play-btn" class="svgIcon btn-img" src="./svgs/play.svg" alt="" style="display: flex;">
+                        <img id="playnext-btn" class="svgIcon btn-img" src="./svgs/arrow-right.svg" alt="" style="display: flex;">
 
                     </div>
                     <div class="inputArea" id="inputArea">
@@ -36,9 +37,14 @@
                 </div>
                 <div class="cache_box section">
                     <span class ="sectionTitle">Cache</span>
-                    <div class="cache_output">
-                        <body></body>
-                    </div>
+                    <div class="output-wrap">
+                        <textarea
+                        readonly
+                        class="output"
+                        wrap="off"
+                        id="output"
+                        ></textarea>
+                </div>
                 </div>
             </div>
             
@@ -111,10 +117,21 @@
                             oninput="this.parentNode.dataset.replicatedValue = this.value"
                         ></input>
                     </div>
+                    <div class="clock_input">
+                        <span class="inputlabel">Clock: </span>
+                        <input
+                        type="text"
+                        class="CT"
+                        wrap="off"
+                        id="CT"
+                        oninput="this.parentNode.dataset.replicatedValue = this.value"
+                        ></input>
+                    </div>
                 </div>
             </div>
         </div>
-        <script src="script.js"></script>
+        <script src="./parser.js"></script>
+        <script src="./script.js"></script>
     </body>
 
 
