@@ -186,9 +186,9 @@ class Parser
         }
         
         this.accessesTotal = this.miss + this.hit ;
-        this.hitRatio = this.hit / this.accessesTotal;
-        this.missRatio = this.miss / this.accessesTotal;
-        this.AMAT = this.cacheCycles + (this.missRatio * 120);
+        this.hitRatio = (this.hit / this.accessesTotal).toPrecision(3);
+        this.missRatio = (this.miss / this.accessesTotal).toPrecision(3);
+        this.AMAT = (this.cacheCycles + (this.missRatio * 120)).toPrecision(5);
     }
 
     cache_command() {
@@ -255,9 +255,9 @@ class Parser
     
     
         this.accessesTotal = this.miss + this.hit ;
-        this.hitRatio = this.hit / this.accessesTotal;
-        this.missRatio = this.miss / this.accessesTotal;
-        this.AMAT = this.cacheCycles + (this.missRatio * 120);
+        this.hitRatio = (this.hit / this.accessesTotal).toPrecision(3);
+        this.missRatio = (this.miss / this.accessesTotal).toPrecision(3);
+        this.AMAT = (this.cacheCycles + (this.missRatio * 120)).toPrecision(5);
         console.log(this.addresses[this.loopindex]);
     }
 }
