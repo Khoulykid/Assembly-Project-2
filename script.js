@@ -26,7 +26,7 @@ document.getElementById('play-btn').addEventListener('click', function() {
     document.getElementById('AMAT').innerHTML = parser.AMAT;
     for (let i = 0; i < parser.cache.length; i++)
         document.getElementById('output').value = document.getElementById('output').value + i + ": " + parser.valbit[i] + ' ' + parser.cache[i] + '\n';
-    
+
 });
 
 document.getElementById('playnext-btn').addEventListener('click', function(){
@@ -48,17 +48,21 @@ document.getElementById('playnext-btn').addEventListener('click', function(){
         parser1.calcC();
         parser1.mapping_type();
     }
-    parser1.cache_command();
-    parser1.loopindex++;
-    document.getElementById('output').value = '';
-    for (let i = 0; i < parser1.cache.length; i++)
-        document.getElementById('output').value = document.getElementById('output').value + i + ": " + parser1.valbit[i] + ' ' + parser1.cache[i] + '\n';
-    document.getElementById('memory_number').innerHTML = parser1.accessesTotal;
-    document.getElementById('Miss_number').innerHTML = parser1.miss;
-    document.getElementById('Hit_number').innerHTML = parser1.hit;
-    document.getElementById('Hit_ratio').innerHTML = parser1.hitRatio;
-    document.getElementById('Miss_ratio').innerHTML = parser1.missRatio;
-    document.getElementById('AMAT').innerHTML = parser1.AMAT;
+    if(parser1.loopindex < parser1.addresses.length)
+    {
+        parser1.cache_command();
+        document.getElementById('output').value = '';
+        for (let i = 0; i < parser1.cache.length; i++)
+            document.getElementById('output').value = document.getElementById('output').value + i + ": " + parser1.valbit[i] + ' ' + parser1.cache[i] + '\n';
+        document.getElementById('memory_number').innerHTML = parser1.accessesTotal;
+        document.getElementById('Miss_number').innerHTML = parser1.miss;
+        document.getElementById('Hit_number').innerHTML = parser1.hit;
+        document.getElementById('Hit_ratio').innerHTML = parser1.hitRatio;
+        document.getElementById('Miss_ratio').innerHTML = parser1.missRatio;
+        document.getElementById('AMAT').innerHTML = parser1.AMAT;
+        parser1.loopindex++;
+    }
+
 })
 
 document.getElementById('stop-btn').addEventListener('click', function(){

@@ -83,11 +83,12 @@
 	background-color: var(--bg);
 	border-radius: 8px;
 	border: 1px solid var(--sectionBorder);
-	width: 22.5%;
+	width: fit-content;
+	justify-content: space-evenly;
 	display: flex;
 	flex-direction: row;
 	gap:1rem;
-	padding-left: 20px;
+
 }
 .inputArea {
 	flex: 1;
@@ -252,7 +253,7 @@
 	width: 100%;
 	border-collapse: separate;
 	table-layout: fixed;
-	border-spacing: 30px 10px;
+	/*border-spacing: 30px 10px;*/
 	row-gap: 1rem;
 	text-align: center;
 
